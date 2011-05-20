@@ -1,0 +1,26 @@
+Serviço:
+
+*Cadastro de contas
+	- dados SMTP
+	- identificação (id, login)
+	-chave
+
+*SOAP
+	Funcionalidades:
+	-enviar e-mail;
+	-buscar retorno de leitora;
+	-listar mensagens enviadas;
+	-buscar mensagem pelo id
+
+Ele vai ter um frond-end em html, web-service vai ser exatamente o que faz o SOAP. 
+
+1.Criar WS Soap;
+	-Classe
+	-Instanciar o SoapServer
+	-WSDL
+2.Trabalhar com exemplos
+	-Utilizar a Exception SoapFalt
+3.Trabalhar com Arrays
+	-Utilizar maxOccurs
+4.Criar clients
+	Utilizar o SoapClient
