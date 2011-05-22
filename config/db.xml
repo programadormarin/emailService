@@ -6,7 +6,7 @@
 		<username>root</username>
 		<password>admin</password>
 	</connection>
-	<proxyCachePath>C:/Server/git-repos/atlas/application/br.com.atlasdoesportesc.atlas/entities/</proxyCachePath>
+	<proxyCachePath>C:/xampp/emailService/application/entities/</proxyCachePath>
 	<classes>
 		<class name="Person" table="pessoa">
 			<property name="id" type="int" column="id" autoIncrement="true" pk="true" />
