@@ -44,6 +44,19 @@ COLLATE = utf8_general_ci;
 
 
 -- -----------------------------------------------------
+-- Table `emailService`.`destinatario`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `emailService`.`destinatario` (
+  `id` INT NOT NULL ,
+  `nome` VARCHAR(255) NULL ,
+  `email` VARCHAR(150) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+-- -----------------------------------------------------
 -- Table `emailService`.`mensagem`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `emailService`.`mensagem` (
@@ -53,31 +66,18 @@ CREATE  TABLE IF NOT EXISTS `emailService`.`mensagem` (
   `lida` TINYINT(1)  NOT NULL ,
   `data_envio` DATETIME NOT NULL ,
   `conta_id` INT NOT NULL ,
+  `destinatario_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_mensagem_conta1` (`conta_id` ASC) ,
+  INDEX `fk_mensagem_destinatario1` (`destinatario_id` ASC) ,
   CONSTRAINT `fk_mensagem_conta1`
     FOREIGN KEY (`conta_id` )
     REFERENCES `emailService`.`conta` (`id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_general_ci;
-
-
--- -----------------------------------------------------
--- Table `emailService`.`destinatario`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `emailService`.`destinatario` (
-  `id` INT NOT NULL ,
-  `nome` VARCHAR(255) NULL ,
-  `email` VARCHAR(150) NOT NULL ,
-  `mensagem_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_destinatario_mensagem1` (`mensagem_id` ASC) ,
-  CONSTRAINT `fk_destinatario_mensagem1`
-    FOREIGN KEY (`mensagem_id` )
-    REFERENCES `emailService`.`mensagem` (`id` )
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mensagem_destinatario1`
+    FOREIGN KEY (`destinatario_id` )
+    REFERENCES `emailService`.`destinatario` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
