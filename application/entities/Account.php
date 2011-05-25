@@ -1,37 +1,63 @@
 <?php
+use entities\Person;
 namespace entities
 {
+	/**
+	 * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
+	 * @Entity
+	 * @Table(name="conta")
+	 */
     class Account
     {
         /**
          * @var int
+         * @Column(type="integer", name="id")
+         * @GeneratedValue
          */
         private $id;
 
         /**
          * @var strint
+         * @Column(length=100, name="email")
          */
         private $email;
 
         /**
          * @var string
+         * 
+         * @Column(length=100, name="host")
          */
         private $host;
 
         /**
          * @var int
+         * @Column(type="integer", name="porta")
          */
         private $port;
 
         /**
          * @var string
+         * @Column(type="integer", name="senha")
          */
         private $pass;
 
         /**
          * @var string
+         * @Column(length=32, name="chave")
          */
         private $secret;
+        
+        /**
+         * @var entities\Person
+         * @ManyToOne(targetEntity="Person", inversedBy="accounts")
+         */
+        private $person;
+        
+        /**
+         * @var entities\Person
+         * @OneToMany(targetEntity="Message", mappedBy="account")
+         */
+        private $messages;
         
         /**
          * @return number

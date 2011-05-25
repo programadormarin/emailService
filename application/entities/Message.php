@@ -1,40 +1,53 @@
 <?php
 namespace entities
 {
+	/**
+	 * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
+	 * @Entity
+	 * @Table(name="mensagem")
+	 */
     class Message
     {
         /**
          * @var int
+         * @Column(type="integer", name="id")
+         * @GeneratedValue
          */
         private $id;
 
         /**
          * @var string
+         * @Column(length=255, name="conteudo")
          */
         private $content;
 
         /**
          * @var string
+         * @Column(length=100, name="assunto")
          */
         private $subject;
 
         /**
          * @var boolean
+         * @Column(type="boolean", name="lida")
          */
         private $read;
 
         /**
          * @var \DateTime
+         * @Column(name="data_envio", type="date")
          */
         private $dateSent;
 
         /**
          * @var entities\Account
+         * @ManyToOne(targetEntity="Account", inversedBy="message")
          */
         private $account;
 
         /**
          * @var entities\Receiver
+         * @ManyToOne(targetEntity="Receiver", inversedBy="message")
          */
         private $receiver;
 

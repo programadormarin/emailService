@@ -1,25 +1,40 @@
 <?php
+use Symfony\Component\Console\Input\StringInput;
 namespace entities
 {
+	/**
+	 * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
+	 * @Entity
+	 * @Table(name="destinatario")
+	 */
     class Receiver
     {
         /**
          * @var int
+         * @Column(type="integer", name="id")
+         * @GeneratedValue
          */
         private $id;
 
         /**
          * @var string
+         * @Column(length=255, name="nome")
          */
         private $name;
 
         /**
          * @var string
+         * @Column(length=150, name="email")
          */
         private $email;
+        
+        /**
+         * @var String
+         * @ManyToOne(targetEntity="Message", inversedBy="receiver")
+         */
+        private $messages;
 
         /**
-         * Enter description here ...
          * @return number
          */
         public function getId() {

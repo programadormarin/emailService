@@ -1,22 +1,37 @@
 <?php
 namespace entities
 {
+	/**
+	 * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
+	 * @Entity
+	 * @Table (name=pessoa)
+	 */
     class Person
     {
         /**
          * @var int
+         * @Column(type="integer")
+         * @GeneratedValue
          */
         private $id;
 
         /**
          * @var string
+         * @Column(length=255, name="nome")
          */
         private $name;
 
         /**
          * @var string
+         * @Column(length=50, name="apelido")
          */
         private $login;
+        
+        /**
+         * @var entities\Account[]
+         * @OneToMany(targetEntity="Account", mappedBy="person")
+         */
+        private $accounts;
 
         /**
          * @return number
