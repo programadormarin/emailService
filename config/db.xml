@@ -22,6 +22,7 @@
 			<property name="host" type="varchar" column="host" />
 			<property name="port" type="varchar" column="porta" />
 			<property name="secret" type="varchar" column="chave" />
+			<association type="many-to-one" classReference="Person" key="personId" name="person"/>
 		</class>
 		<class name="Message" table="mensagem">
 			<property name="id" type="int" column="id" autoIncrement="true" pk="true" />
@@ -29,7 +30,7 @@
 			<property name="receiverId" type="int" column="detinatario_id" />
 			<property name="content" type="varchar" column="conteudo" />
 			<property name="subject" type="varchar" column="assunto" />
-			<property name="read" type="boolean" column="lida" />
+			<property name="read" type="bool" column="lida" />
 			<property name="dateSent" type="datetime" column="data_envio" />
 			<association type="many-to-one" classReference="Account" key="accountId" />
 			<association type="many-to-one" classReference="Receiver" key="receiverId"/>

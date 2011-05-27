@@ -1,15 +1,23 @@
 <?php
-namespace dao
-{
-	
-	use entities\Person;
 
-	class PersonDao
+class PersonDao extends OutletDaoSupport
+{
+	/**
+	 * @param Person $pessoa
+	 */
+	public function save(Person $pessoa)
 	{
-		public function save(Person $person)
-		{
-			$person->name = "seilá";
-			
-		}
+		$this->getOutlet()->save($pessoa);
 	}
+	
+	
+	/**
+	 * @param int $id
+	 * @return Person
+	 */
+	public function getById($id)
+	{
+		return $this->getOutlet()->load('Person', $id);
+	}
+
 }

@@ -1,78 +1,91 @@
 <?php
-namespace entities
+/**
+ * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
+ * @Entity
+ * @Table (name=pessoa)
+ */
+class Person
 {
 	/**
-	 * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
-	 * @Entity
-	 * @Table (name=pessoa)
+	 * @var int
+	 * @Column(type="integer")
+	 * @GeneratedValue
 	 */
-    class Person
-    {
-        /**
-         * @var int
-         * @Column(type="integer")
-         * @GeneratedValue
-         */
-        private $id;
+	private $id;
 
-        /**
-         * @var string
-         * @Column(length=255, name="nome")
-         */
-        private $name;
+	/**
+	 * @var string
+	 * @Column(length=255, name="nome")
+	 */
+	private $name;
 
-        /**
-         * @var string
-         * @Column(length=50, name="apelido")
-         */
-        private $login;
-        
-        /**
-         * @var entities\Account[]
-         * @OneToMany(targetEntity="Account", mappedBy="person")
-         */
-        private $accounts;
+	/**
+	 * @var string
+	 * @Column(length=50, name="apelido")
+	 */
+	private $login;
 
-        /**
-         * @return number
-         */
-        public function getId() {
-            return $this->id;
-        }
+	/**
+	 * @var Account[]
+	 * @OneToMany(targetEntity="Account", mappedBy="person")
+	 */
+	private $accounts;
 
-        /**
-         * @param int $id
-         */
-        public function setId($id) {
-            $this->id = $id;
-        }
+	/**
+	 * @return number
+	 */
+	public function getId() 
+	{
+		return $this->id;
+	}
 
-        /**
-         * @return string
-         */
-        public function getName() {
-            return $this->name;
-        }
+	/**
+	 * @param int $id
+	 */
+	public function setId($id) 
+	{
+		$this->id = $id;
+	}
 
-        /**
-         * @param string $name
-         */
-        public function setName($name) {
-            $this->name = $name;
-        }
+	/**
+	 * @return string
+	 */
+	public function getName() 
+	{
+		return $this->name;
+	}
 
-        /**
-         * @return string
-         */
-        public function getLogin() {
-            return $this->login;
-        }
+	/**
+	 * @param string $name
+	 */
+	public function setName($name) 
+	{
+		$this->name = $name;
+	}
 
-        /**
-         * @param string $login
-         */
-        public function setLogin($login) {
-            $this->login = $login;
-        }
-    }
+	/**
+	 * @return string
+	 */
+	public function getLogin() 
+	{
+		return $this->login;
+	}
+
+	/**
+	 * @param string $login
+	 */
+	public function setLogin($login) 
+	{
+		$this->login = $login;
+	}
+	
+	public function getAccounts()
+	{
+		return $this->accounts;
+	}
+	
+	public function setAccounts(array $acounts)
+	{
+		$this->accounts = $acounts;
+	}
 }

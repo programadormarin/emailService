@@ -1,26 +1,23 @@
 <?php
 set_include_path(
-	get_include_path()
-	. PATH_SEPARATOR . __DIR__ . '/../'
-	. PATH_SEPARATOR . __DIR__ . '/../../action-mapper/'
-	. PATH_SEPARATOR . __DIR__ . '/../../doctrine-orm/'
-	. PATH_SEPARATOR . __DIR__ . '/../../display-objects/'
+	get_include_path() 
+	. PATH_SEPARATOR . '../'
+	. PATH_SEPARATOR . '/../../../action-mapper/'
+	. PATH_SEPARATOR . '/../../../doctrine-orm/'
+	. PATH_SEPARATOR . '/../../../display-objects/'
+	. PATH_SEPARATOR . '/aplication/'
+	. PATH_SEPARATOR . '/aplication/dao/'
+	. PATH_SEPARATOR . '/aplication/entities/'
+	. PATH_SEPARATOR . '/aplication/util/'
+	. PATH_SEPARATOR . '/config/'
 );
 
-require 'application/util/autoloader/NamespaceAutoloader.php';
+require_once 'application/dao/PersonDao.php';
+require_once 'application/entities/Person.php';
+require 'application/bootstrap.php';
 
-use util\autoloader\NamespaceAutoloader;
-use entities\Person;
+require 'application/actions/MainActionController.php';
 
-NamespaceAutoloader::register();
 
-use Doctrine\ORM\Configuration;
 
-$conf = new Configuration();
 
-$p = new Person();
-
-$p->setLogin('hermen');
-$p->setName('hermen');
-
-$conf->

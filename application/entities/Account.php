@@ -1,146 +1,158 @@
 <?php
-use entities\Person;
-namespace entities
+/**
+ * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
+ * @Entity
+ * @Table(name="conta")
+ */
+class Account
 {
 	/**
-	 * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
-	 * @Entity
-	 * @Table(name="conta")
+	 * @var int
+	 * @Column(type="integer", name="id")
+	 * @GeneratedValue
 	 */
-    class Account
-    {
-        /**
-         * @var int
-         * @Column(type="integer", name="id")
-         * @GeneratedValue
-         */
-        private $id;
+	private $id;
 
-        /**
-         * @var strint
-         * @Column(length=100, name="email")
-         */
-        private $email;
+	/**
+	 * @var strint
+	 * @Column(length=100, name="email")
+	 */
+	private $email;
 
-        /**
-         * @var string
-         * 
-         * @Column(length=100, name="host")
-         */
-        private $host;
+	/**
+	 * @var string
+	 *
+	 * @Column(length=100, name="host")
+	 */
+	private $host;
 
-        /**
-         * @var int
-         * @Column(type="integer", name="porta")
-         */
-        private $port;
+	/**
+	 * @var int
+	 * @Column(type="integer", name="porta")
+	 */
+	private $port;
 
-        /**
-         * @var string
-         * @Column(type="integer", name="senha")
-         */
-        private $pass;
+	/**
+	 * @var string
+	 * @Column(type="integer", name="senha")
+	 */
+	private $pass;
 
-        /**
-         * @var string
-         * @Column(length=32, name="chave")
-         */
-        private $secret;
-        
-        /**
-         * @var entities\Person
-         * @ManyToOne(targetEntity="Person", inversedBy="accounts")
-         */
-        private $person;
-        
-        /**
-         * @var entities\Person
-         * @OneToMany(targetEntity="Message", mappedBy="account")
-         */
-        private $messages;
-        
-        /**
-         * @return number
-         */
-        public function getId() {
-            return $this->id;
-        }
+	/**
+	 * @var string
+	 * @Column(length=32, name="chave")
+	 */
+	private $secret;
 
-        /**
-         * @param int $id
-         */
-        public function setId($id) {
-            $this->id = $id;
-        }
+	/**
+	 * @var Person
+	 * @ManyToOne(targetEntity="Person", inversedBy="accounts")
+	 */
+	private $person;
 
-        /**
-         * @return strint
-         */
-        public function getEmail() {
-            return $this->email;
-        }
+	/**
+	 * @var Message[]
+	 * @OneToMany(targetEntity="Message", mappedBy="account")
+	 */
+	private $messages;
 
-        /**
-         * @param string $email
-         */
-        public function setEmail($email) {
-            $this->email = $email;
-        }
+	/**
+	 * @return number
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-        /**
-         * @return string
-         */
-        public function getHost() {
-            return $this->host;
-        }
+	/**
+	 * @param int $id
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
 
-        /**
-         * @param string $host
-         */
-        public function setHost($host) {
-            $this->host = $host;
-        }
+	/**
+	 * @return strint
+	 */
+	public function getEmail() {
+		return $this->email;
+	}
 
-        /**
-         * @return number
-         */
-        public function getPort() {
-            return $this->port;
-        }
+	/**
+	 * @param string $email
+	 */
+	public function setEmail($email) {
+		$this->email = $email;
+	}
 
-        /**
-         * @param int $port
-         */
-        public function setPort($port) {
-            $this->port = $port;
-        }
+	/**
+	 * @return string
+	 */
+	public function getHost() {
+		return $this->host;
+	}
 
-        /**
-         * @return string
-         */
-        public function getPass() {
-            return $this->pass;
-        }
+	/**
+	 * @param string $host
+	 */
+	public function setHost($host) {
+		$this->host = $host;
+	}
 
-        /**
-         * @param string $pass
-         */
-        public function setPass($pass) {
-            $this->pass = $pass;
-        }
+	/**
+	 * @return number
+	 */
+	public function getPort() {
+		return $this->port;
+	}
 
-        /**
-         * @return string
-         */
-        public function getSecret() {
-            return $this->secret;
-        }
+	/**
+	 * @param int $port
+	 */
+	public function setPort($port) {
+		$this->port = $port;
+	}
 
-        /**
-         * @param string $secret
-         */
-        public function setSecret($secret) {
-            $this->secret = $secret;
-        }
-    }
+	/**
+	 * @return string
+	 */
+	public function getPass() {
+		return $this->pass;
+	}
+
+	/**
+	 * @param string $pass
+	 */
+	public function setPass($pass) {
+		$this->pass = $pass;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSecret() {
+		return $this->secret;
+	}
+
+	/**
+	 * @param string $secret
+	 */
+	public function setSecret($secret) {
+		$this->secret = $secret;
+	}
+	
+	/**
+	 * @return Person
+	 */
+	public function getPerson()
+	{
+		return $this->person;
+	}
+	
+	/**
+	 * @param Person $person
+	 */
+	public function setPerson(Person $person)
+	{
+		$this->person = $person;
+	}
 }

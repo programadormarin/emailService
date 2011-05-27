@@ -3,6 +3,6 @@
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/action-mapper"/>
 	<buildpathentry kind="src" path=""/>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/doctrine-orm"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/outlet-orm"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/display-objects"/>
 </buildpath>

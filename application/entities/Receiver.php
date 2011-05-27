@@ -1,79 +1,75 @@
 <?php
-use Symfony\Component\Console\Input\StringInput;
-namespace entities
+/**
+ * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
+ * @Entity
+ * @Table(name="destinatario")
+ */
+class Receiver
 {
 	/**
-	 * @author Hermenegildo Marin Júnior <programador.marin@gmail.com>
-	 * @Entity
-	 * @Table(name="destinatario")
+	 * @var int
+	 * @Column(type="integer", name="id")
+	 * @GeneratedValue
 	 */
-    class Receiver
-    {
-        /**
-         * @var int
-         * @Column(type="integer", name="id")
-         * @GeneratedValue
-         */
-        private $id;
+	private $id;
 
-        /**
-         * @var string
-         * @Column(length=255, name="nome")
-         */
-        private $name;
+	/**
+	 * @var string
+	 * @Column(length=255, name="nome")
+	 */
+	private $name;
 
-        /**
-         * @var string
-         * @Column(length=150, name="email")
-         */
-        private $email;
-        
-        /**
-         * @var String
-         * @ManyToOne(targetEntity="Message", inversedBy="receiver")
-         */
-        private $messages;
+	/**
+	 * @var string
+	 * @Column(length=150, name="email")
+	 */
+	private $email;
 
-        /**
-         * @return number
-         */
-        public function getId() {
-            return $this->id;
-        }
+	/**
+	 * @var String
+	 * @ManyToOne(targetEntity="Message", inversedBy="receiver")
+	 */
+	private $messages;
 
-        /**
-         * @param int $id
-         */
-        public function setId($id) {
-            $this->id = $id;
-        }
+	/**
+	 * @return number
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-        /**
-         * @return string
-         */
-        public function getName() {
-            return $this->name;
-        }
+	/**
+	 * @param int $id
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
 
-        /**
-         * @param string $name
-         */
-        public function setName($name) {
-            $this->name = $name;
-        }
+	/**
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-        /**
-         * @return string
-         */
-        public function getEmail() {
-            return $this->email;
-        }
+	/**
+	 * @param string $name
+	 */
+	public function setName($name) {
+		$this->name = $name;
+	}
 
-        /**
-         * @param string $email
-         */
-        public function setEmail($email) {
-            $this->email = $email;
-        }
-    }
+	/**
+	 * @return string
+	 */
+	public function getEmail() {
+		return $this->email;
+	}
+
+	/**
+	 * @param string $email
+	 */
+	public function setEmail($email) {
+		$this->email = $email;
+	}
 }
