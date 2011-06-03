@@ -1,23 +1,16 @@
 <?php
 set_include_path(
-	get_include_path() 
-	. PATH_SEPARATOR . '../'
-	. PATH_SEPARATOR . '/../../../action-mapper/'
-	. PATH_SEPARATOR . '/../../../doctrine-orm/'
-	. PATH_SEPARATOR . '/../../../display-objects/'
-	. PATH_SEPARATOR . '/aplication/'
-	. PATH_SEPARATOR . '/aplication/dao/'
-	. PATH_SEPARATOR . '/aplication/entities/'
-	. PATH_SEPARATOR . '/aplication/util/'
-	. PATH_SEPARATOR . '/config/'
+	get_include_path() . PATH_SEPARATOR
+	. '../' . PATH_SEPARATOR
+	. '../../action-mapper/' . PATH_SEPARATOR
+	. '../../outlet-orm/' . PATH_SEPARATOR
+	. '../../display-objects/' . PATH_SEPARATOR
 );
 
-require_once 'application/dao/PersonDao.php';
-require_once 'application/entities/Person.php';
 require 'application/bootstrap.php';
 
-require 'application/actions/MainActionController.php';
-
-
-
-
+$app = WebApplication::getInstance();
+$app->startSession('emailService');
+$app->getActionMapper()->setClassPrefix('EmailService');
+$app->getFilterChain()->attachFilter('*', new IndexFilter());
+$app->run();

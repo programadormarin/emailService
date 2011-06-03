@@ -1,6 +1,6 @@
 <?php
 
-class MainActionController implements AppAction
+class EmailServiceAdmActionController implements AppAction
 {
 	/**
 	 * @param  AppRequest $request
@@ -10,7 +10,7 @@ class MainActionController implements AppAction
 	{
 		$component = $this->render($request);
 
-		echo $component instanceof UIComponent ? new CadastroView($component) : $component;
+		echo $component;
 	}
 
 	/**
@@ -34,9 +34,9 @@ class MainActionController implements AppAction
 	{
 		switch ($request->getUriSegment(1)) {
 			case 'message':
-				return new MessageActionController();
+				return new EmailServiceMessageView();
 			case 'cadastro':
-				return new CadastroActionController();
+				return new EmailServiceCadastroView();
 		}
 	}
 }
