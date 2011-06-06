@@ -93,4 +93,38 @@ class EmailServiceActionController implements AppAction
 		}
 		return $hash . $hash;
 	}
+	
+	protected function enviaConfirmacao(Account $conta)
+	{
+		$mail = new PHPMailer();
+	
+		$mail->IsSMTP(); // send via SMTP
+		$mail->Host = 'smtp.gmail.com'; // SMTP servers
+		$mail->Port = '465';
+		$mail->SMTPAuth = true; // turn on SMTP authentication
+		$mail->Username = "programador.marin@gmail.com"; // SMTP username
+		$mail->Password = "cornholiojuhmj418"; // SMTP password
+		
+		$mail->From = $conta->getEmail();
+		$mail->FromName = "Name to Display";
+		$mail->AddAddress("Recipient Email address ","Recipient Name");
+//		$mail->AddCC('CC Email Address');
+//		$mail->AddBCC('BCC Email address');
+		$mail->AddReplyTo('programador.marin@gmail.com');
+		
+		$mail->WordWrap = 50; // set word wrap
+		
+		$mail->IsHTML(true); // send as HTML
+		
+		$mail->Subject = "Subject";
+		$mail->Body = '
+			Sua chave para uso do webservice é:' . $conta->getSecret();
+		
+		if(!$mail->Send())
+		{
+			echo "Message did not sent <p>";
+			echo "Mailer Error: " . $mail->ErrorInfo;
+			exit;
+		}
+	}
 }

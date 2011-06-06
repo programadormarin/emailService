@@ -5,6 +5,7 @@ require 'application/br.com.lcobucci.action-mapper/autoloader/ActionMapperAutoLo
 require 'application/br.com.lcobucci.display-objects/autoloader/DisplayObjectsAutoloader.php';
 require 'application/org.outlet-orm/autoloader/OutletAutoloader.php';
 require 'application/util/EmailServiceAutoloader.php';
+require 'application/util/phpmailer/phpmailer.inc.php';
 
 ActionMapperAutoLoader::register();
 DisplayObjectsAutoloader::register();
