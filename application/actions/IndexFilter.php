@@ -16,7 +16,7 @@ class IndexFilter implements AppFilter {
 	 * @see AppFilter::applyFilter()
 	 */
 	public function applyFilter(AppRequest $request) {
-		$request->setUri('adm/' . $request->getUri());
+		$request->setUri($request->getUri());
 	}
 }
 

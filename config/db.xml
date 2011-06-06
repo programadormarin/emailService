@@ -4,7 +4,7 @@
 		<dialect>mysql</dialect>
 		<dsn>mysql:host=localhost;dbname=emailService</dsn>
 		<username>root</username>
-		<password>admin</password>
+		<password></password>
 	</connection>
 	<proxyCachePath>C:/xampp/htdocs/emailService/application/entities/</proxyCachePath>
 	<classes>
