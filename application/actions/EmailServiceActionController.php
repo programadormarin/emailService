@@ -10,7 +10,7 @@ class EmailServiceActionController implements AppAction
 	{
 		$component = $this->render($request);
 		
-		echo $component;
+		echo $component instanceof UIComponent ? new AtlasAdmWindow($component) : $component;
 	}
 
 	/**
@@ -32,9 +32,10 @@ class EmailServiceActionController implements AppAction
 	 */
 	protected function getAction(AppRequest $request)
 	{
+		die($request->getUriSegment(1));
 		switch ($request->getUriSegment(1)) {
 			case 'message':
-				return new EmailServiceMessageView();
+				return new EmailServiceMessageActionController();
 			default:
 				if ($request->getHttpMethod() === 'POST'){
 					$this->cadastra($request);
@@ -94,37 +95,32 @@ class EmailServiceActionController implements AppAction
 		return $hash . $hash;
 	}
 	
-	protected function enviaConfirmacao(Account $conta)
+	protected function enviaEmail(Message $message)
 	{
 		$mail = new PHPMailer();
 	
-		$mail->IsSMTP(); // send via SMTP
-		$mail->Host = 'smtp.gmail.com'; // SMTP servers
-		$mail->Port = '465';
-		$mail->SMTPAuth = true; // turn on SMTP authentication
-		$mail->Username = "programador.marin@gmail.com"; // SMTP username
-		$mail->Password = "cornholiojuhmj418"; // SMTP password
+		$mail->IsSMTP();
+		$mail->Host = $message->getAccount()->getHost();
+		$mail->Port = $message->getAccount()->getPort();
+		$mail->SMTPAuth = true;
+		$mail->Username = $message->getAccount()->getEmail();
+		$mail->Password = $message->getAccount()->getPass();
 		
-		$mail->From = $conta->getEmail();
-		$mail->FromName = "Name to Display";
-		$mail->AddAddress("Recipient Email address ","Recipient Name");
-//		$mail->AddCC('CC Email Address');
-//		$mail->AddBCC('BCC Email address');
-		$mail->AddReplyTo('programador.marin@gmail.com');
+		$mail->From = $message->getAccount()->getEmail();
+		$mail->FromName = $message->getAccount()->getPerson()->getName();
+		$mail->AddAddress($message->getReceiver()->getEmail(),$message->getReceiver()->getName());
+		$mail->AddReplyTo($message->getAccount()->getEmail(), $message->getAccount()->getPerson()->getName());
 		
-		$mail->WordWrap = 50; // set word wrap
+		$mail->WordWrap = 100;
 		
-		$mail->IsHTML(true); // send as HTML
+		$mail->IsHTML(true);
 		
-		$mail->Subject = "Subject";
-		$mail->Body = '
-			Sua chave para uso do webservice é:' . $conta->getSecret();
+		$mail->Subject = $message->getSubject();
+		$mail->Body = $message->getContent();
 		
 		if(!$mail->Send())
 		{
-			echo "Message did not sent <p>";
-			echo "Mailer Error: " . $mail->ErrorInfo;
-			exit;
+			return new EmailServiceSucessoCadastroView();
 		}
 	}
 }

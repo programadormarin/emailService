@@ -12,5 +12,5 @@ require 'application/bootstrap.php';
 $app = WebApplication::getInstance();
 $app->startSession('emailService');
 $app->getActionMapper()->setClassPrefix('EmailService');
-$app->getFilterChain()->attachFilter('*', new IndexFilter());
+//$app->getActionMapper()->attachAction("message", new EmailServiceActionController());
 $app->run();

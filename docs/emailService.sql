@@ -9,7 +9,7 @@ USE `emailService` ;
 -- Table `emailService`.`pessoa`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `emailService`.`pessoa` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(255) NOT NULL ,
   `apelido` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`id`) ,
@@ -23,7 +23,7 @@ COLLATE = utf8_general_ci;
 -- Table `emailService`.`conta`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `emailService`.`conta` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `email` VARCHAR(100) NOT NULL ,
   `host` VARCHAR(100) NOT NULL ,
   `porta` INT NOT NULL ,
@@ -47,7 +47,7 @@ COLLATE = utf8_general_ci;
 -- Table `emailService`.`destinatario`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `emailService`.`destinatario` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(255) NULL ,
   `email` VARCHAR(150) NOT NULL ,
   PRIMARY KEY (`id`) )
@@ -60,7 +60,7 @@ COLLATE = utf8_general_ci;
 -- Table `emailService`.`mensagem`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `emailService`.`mensagem` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `conteudo` VARCHAR(45) NOT NULL ,
   `assunto` VARCHAR(45) NOT NULL ,
   `lida` TINYINT(1)  NOT NULL ,

@@ -3,12 +3,11 @@ Serviço:
 *Cadastro de contas
 	- dados SMTP
 	- identificação (id, login)
-	-chave
+	- chave
 
 *SOAP
 	Funcionalidades:
 	-enviar e-mail;
-	-buscar retorno de leitora;
 	-listar mensagens enviadas;
 	-buscar mensagem pelo id
 
