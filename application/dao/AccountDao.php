@@ -7,13 +7,15 @@ class AccountDao extends OutletDaoSupport
 	 */
 	public function save(Account $account)
 	{
-		return $this->getOutlet()->save($account);	
+		$this->getOutlet()->save($account);
+		return $account;	
 	}
 	
 	/**
+	 * @param int $id
 	 * @return Account
 	 */
-	public function getById()
+	public function getById($id)
 	{
 		return $this->getOutlet()->load('Account', $id);
 	}

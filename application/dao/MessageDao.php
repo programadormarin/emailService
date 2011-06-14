@@ -3,11 +3,20 @@ require_once 'Dao.php';
 
 class MessageDao extends OutletDaoSupport 
 {
+	/**
+	 * @param Message $message
+	 * @return Message
+	 */
 	public function save(Message $message)
 	{
-		return $this->getOutlet()->save($message);
+		$this->getOutlet()->save($message);
+		return $message;
 	}
 	
+	/**
+	 * @param int $id
+	 * @return Message
+	 */
 	public function getById($id)
 	{
 		return $this->getOutlet()->load('Message', $id);

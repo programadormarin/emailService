@@ -2,13 +2,15 @@
 
 class PersonDao extends OutletDaoSupport
 {
+	
 	/**
 	 * @param Person $pessoa
+	 * @return Person
 	 */
 	public function save(Person $pessoa)
 	{
 		 $this->getOutlet()->save($pessoa);
-		 return $this->getByLogin($pessoa->getLogin()); 
+		 return $pessoa; 
 	}	
 	
 	/**
@@ -23,11 +25,10 @@ class PersonDao extends OutletDaoSupport
 	
 	/**
 	 * @param string $login
-	 * @return Person
+	 * @return Person[]
 	 */
 	protected function getByLogin($login)
 	{
 		return $this->getOutlet()->selectOne('Person', 'apelido = ?', array($login));
 	}
-
 }

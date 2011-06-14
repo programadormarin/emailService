@@ -3,3 +3,83 @@
 html {
 	font: normal medium Arial, sans-serif;
 }
+
+body {
+	background: #bacbfe;
+}
+
+div#mensagem {
+	float: left;
+	height: 20px;
+	background: #dadada;
+	text-align: center;
+	border-radius: 5px;
+	margin: 0 0 0 200px;
+	color: #336688;
+}
+
+div#cadastro {
+	margin: 150px 0 0 200px;
+	width: 730px;
+	padding: 10px;
+	background: #99aadd;
+	border-radius: 10px;
+}
+
+div#cadastro h2 {
+	text-align: center;
+	color: #2355ca;
+}
+
+div#cadastro legend {
+	text-align: center;
+	color: #2355aa;
+	font-weight: bold;
+}
+
+div#cadastro fieldset {
+	width: 700px;
+	height: 260px;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+div#cadastro input {
+	margin-bottom: 10px;
+	color: #2355aa;
+	font-weight: bold;
+	border-radius: 10px;
+	padding: 2px;
+}
+
+div#cadastro label {
+	color: #123388;
+}
+
+input#nome {
+	width: 290px;
+}
+
+input#email {
+	width: 290px;
+}
+
+input#host {
+	width: 290px;
+}
+
+input#porta {
+	width: 100px;
+}
+
+input#apelido {
+	width: 200px;
+}
+
+input#senha {
+	width: 200px;
+}
+
+input#cadastrar {
+	
+}

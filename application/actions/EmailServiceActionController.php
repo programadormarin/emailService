@@ -22,7 +22,7 @@ class EmailServiceActionController implements AppAction
 			return $action->process($request);
 		}
 
-		throw new AppActionNotFoundException('Ação não encontrada');
+		throw new AppActionNotFoundException('Ação não encontrada: "' . $request->getUriSegment(1) . '"');
 	}
 
 	/**
@@ -40,13 +40,18 @@ class EmailServiceActionController implements AppAction
 			default:
 				if ($request->getHttpMethod() === 'POST'){
 					$this->cadastra($request);
-				}else {
+					return new EmailServiceCadastroView();
+				} else {
 					return new EmailServiceCadastroView();
 				}
+				break;
 		}
 	}
 	
-
+	/**
+	 * @param AppRequest $request
+	 * @return Ambigous Person
+	 */
 	protected function salvaPessoa(AppRequest $request)
 	{
 			$post = $request->getVars();
@@ -73,7 +78,7 @@ class EmailServiceActionController implements AppAction
 			$conta->setHost($post['host']);
 			$conta->setPort($post['porta']);
 			$conta->setPass($post['senha']);
-			$conta->setSecret($this->geraSecret($conta->getPerson()->getLogin(), $conta->getPass()));
+			$conta->setSecret($this->geraSecret($conta->getPerson()->getLogin()));
 			
 			return $daoConta->save($conta);
 	}
@@ -81,18 +86,22 @@ class EmailServiceActionController implements AppAction
 	protected function cadastra(AppRequest $request)
 	{
 			$conta = $this->salvaConta($request);
-			return new EmailServiceSucessoCadastroView();
+			return new EmailServiceCadastroView();
 	}
 	
-	protected function geraSecret($login, $senha, $hash = null)
+	/**
+	 * @param unknown_type $login
+	 * @param unknown_type $salt
+	 * @return string
+	 */
+	protected function geraSecret($login, $salt = null)
 	{
-		if (!$hash) {
-			$prefixo = uniqid(time());
-		}
+		if (is_null($salt)) $salt = uniqid();
 		
-		for ($i = 0; $i < 1000; $i++) {
-			$hash = md5($login . $senha);
-		}
-		return $hash . $hash;
+		$hash = $salt;
+		
+		for ($i = 0; $i < 1000; ++$i) $hash = md5($hash . $login);
+		
+		return $hash . $salt;
 	}
 }
