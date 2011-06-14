@@ -30,5 +30,5 @@ interface EmailServiceMessageService
 	 * @param string $dataFinal Data final no formato AAAA-MM-DD
 	 * @return MensagemDto[]
 	 */
-	public function listaMensagens($chaveAutenticacao, $dataInicial, $dataFinal);
+	public function listAll($chaveAutenticacao, $dataInicial, $dataFinal);
 }

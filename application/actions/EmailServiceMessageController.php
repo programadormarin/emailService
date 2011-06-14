@@ -9,8 +9,8 @@ class EmailServiceMessageController implements EmailServiceMessageService
 				return $this->send($vars['chave'], $vars['assunto'], $vars['conteudo'], $vars['emailDestinatario'], $vars['nomeDestinatario']);
 			case 'getById':
 				return $this->getById($vars['chave'], $vars['id']);
-			case 'listaMensagens':
-				return $this->listaMensagens($vars['chave'], $vars['dataInicial'], $vars['dataFinal']);
+			case 'listAll':
+				return $this->listAll($vars['chave'], $vars['dataInicial'], $vars['dataFinal']);
 			default:
 				throw new SoapFault("Ação inexistente");
 		}
@@ -54,7 +54,7 @@ class EmailServiceMessageController implements EmailServiceMessageService
 	/* (non-PHPdoc)
 	 * @see EmailServiceMessageService::listaMensagens()
 	 */
-	public function listaMensagens($chave, $dataInicial, $dataFinal) {
+	public function listAll($chave, $dataInicial, $dataFinal) {
 		$conta = $this->verificaChave($chave);
 		$messageDao = new MessageDao();
 		try {
