@@ -94,33 +94,4 @@ class EmailServiceActionController implements AppAction
 		}
 		return $hash . $hash;
 	}
-	
-	protected function enviaEmail(Message $message)
-	{
-		$mail = new PHPMailer();
-	
-		$mail->IsSMTP();
-		$mail->Host = $message->getAccount()->getHost();
-		$mail->Port = $message->getAccount()->getPort();
-		$mail->SMTPAuth = true;
-		$mail->Username = $message->getAccount()->getEmail();
-		$mail->Password = $message->getAccount()->getPass();
-		
-		$mail->From = $message->getAccount()->getEmail();
-		$mail->FromName = $message->getAccount()->getPerson()->getName();
-		$mail->AddAddress($message->getReceiver()->getEmail(),$message->getReceiver()->getName());
-		$mail->AddReplyTo($message->getAccount()->getEmail(), $message->getAccount()->getPerson()->getName());
-		
-		$mail->WordWrap = 100;
-		
-		$mail->IsHTML(true);
-		
-		$mail->Subject = $message->getSubject();
-		$mail->Body = $message->getContent();
-		
-		if(!$mail->Send())
-		{
-			return new EmailServiceSucessoCadastroView();
-		}
-	}
 }

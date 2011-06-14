@@ -11,7 +11,7 @@ interface EmailServiceMessageService
 	 * @param string $nomeDestinatario Nome do destinatário (opcional)
 	 * @return int
 	 */
-	public function envia($chaveAutenticacao, $assunto, $conteudo, $emailDestinatario, $nomeDestinatario = null);
+	public function send($chaveAutenticacao, $assunto, $conteudo, $emailDestinatario, $nomeDestinatario = null);
 	
 	/**
 	 * Busca a mensagem pelo ID
