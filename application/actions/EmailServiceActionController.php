@@ -9,8 +9,7 @@ class EmailServiceActionController implements AppAction
 	public function process(AppRequest $request)
 	{
 		$component = $this->render($request);
-		
-		echo $component instanceof UIComponent ? new AtlasAdmWindow($component) : $component;
+		echo $component;
 	}
 
 	/**
@@ -32,10 +31,12 @@ class EmailServiceActionController implements AppAction
 	 */
 	protected function getAction(AppRequest $request)
 	{
-		die($request->getUriSegment(1));
 		switch ($request->getUriSegment(1)) {
 			case 'message':
-				return new EmailServiceMessageActionController();
+				$server = new SoapServer(__DIR__ . '../webservices/wsdl/EmailService.wsdl');
+				$server->setClass('EmailServiceMessageController');
+				$server->handle();
+				break;
 			default:
 				if ($request->getHttpMethod() === 'POST'){
 					$this->cadastra($request);

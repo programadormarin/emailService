@@ -30,9 +30,11 @@ class EmailServiceMessageController implements EmailServiceMessageService
 		$message->setSubject($assunto);
 		$message->setReceiver($destinatario);
 		$message->setRead(FALSE);
+		
 		try {
 			$messageDao->save($message);
 			$this->enviaEmail($message);
+			return $message->getId();
 		} catch (Exception $e) {
 			throw new SoapFault("Não foi possível salvar e enviar a mensagem: " . $e->getMessage() . '<pre>' . $e->getTraceAsString());
 		}
@@ -44,8 +46,9 @@ class EmailServiceMessageController implements EmailServiceMessageService
 	public function getById($chave, $id) {
 		$conta = $this->verificaChave($chave);
 		$messageDao = new MessageDao();
+		
 		try {
-			return $messageDao->getById($id);
+			return $this->toMessageDto($messageDao->getById($id));
 		} catch (Exception $e) {
 			throw new SoapFault("Não foi possível encontrar a mensagem: " . $e->getMessage() . '<pre>' . $e->getTraceAsString());
 		}
@@ -57,8 +60,17 @@ class EmailServiceMessageController implements EmailServiceMessageService
 	public function listAll($chave, $dataInicial, $dataFinal) {
 		$conta = $this->verificaChave($chave);
 		$messageDao = new MessageDao();
+		
 		try {
-			$messageDao->getByDateInterval(new DateTime($dataInicial), new DateTime($dataFinal));
+			$mensagens = $messageDao->getByDateInterval(new DateTime($dataInicial), new DateTime($dataFinal));
+			$messageDtos = array();
+			
+			foreach ($mensagens as $mensagem) {
+				$messageDtos[] = $this->toMessageDto($mensagem);
+			}
+			
+			return $messageDtos;
+			
 		} catch (Exception $e) {
 			throw new SoapFault("Não foi possível listar mensagens: " . $e->getMessage() . '<pre>' . $e->getTraceAsString());
 		}
@@ -98,7 +110,7 @@ class EmailServiceMessageController implements EmailServiceMessageService
 	 */
 	protected function enviaEmail(Message $message)
 	{
-		$mail = new PHPMailer();
+		$mail = new PHPMailer(true);
 	
 		$mail->IsSMTP();
 		$mail->Host = $message->getAccount()->getHost();
@@ -119,9 +131,24 @@ class EmailServiceMessageController implements EmailServiceMessageService
 		$mail->Subject = $message->getSubject();
 		$mail->Body = $message->getContent();
 		
-		return $mail->Send();
+		$mail->Send();
 	}
 
+	protected function toMessageDto(Message $message)
+	{
+		$messageDto = new MessageDto();
+		
+		$messageDto->id = $message->getId();
+		$messageDto->emailDestinatario = $message->getReceiver()->getEmail();
+		$messageDto->nomeDestinatario = $message->getReceiver()->getName();
+		$messageDto->emailRemetente = $message->getAccount()->getEmail();
+		$messageDto->nomeRemetente = $message->getAccount()->getPerson()->getName();
+		$messageDto->assunto = $message->getSubject();
+		$messageDto->conteudo = $message->getContent();
+		$messageDto->dataEnvio = $message->getDateSent();
+		
+		return $messageDto;
+	}
 }
 
 ?>
