@@ -21,8 +21,7 @@ class EmailServiceActionController implements AppAction
 		if ($action = $this->getAction($request)) {
 			return $action->process($request);
 		}
-
-		throw new AppActionNotFoundException('Ação não encontrada: "' . $request->getUriSegment(1) . '"');
+		throw new AppActionNotFoundException('Ação não encontrada: "' . $request->getUriSegment(0) . '"');
 	}
 
 	/**
@@ -33,6 +32,8 @@ class EmailServiceActionController implements AppAction
 	{
 		switch ($request->getUriSegment(0)) {
 			case 'message':
+				require_once 'application/actions/EmailServiceMessageController.php';
+				require_once 'application/webservices/dto/MessageDto.php';
 				$server = new SoapServer(__DIR__ . '/../webservices/wsdl/EmailService.wsdl');
 				$server->setClass('EmailServiceMessageController');
 				$server->handle();

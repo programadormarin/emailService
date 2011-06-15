@@ -36,7 +36,7 @@
     <wsdl:part name="conteudo" type="xsd:string"/>
   </wsdl:message>
   <wsdl:message name="sendResponse">
-    <wsdl:part name="response" type="xsd:boolean"/>
+    <wsdl:part name="id" type="xsd:int"/>
   </wsdl:message>
   
   <wsdl:message name="getByIdRequest">
@@ -72,30 +72,30 @@
   <wsdl:binding name="EmailServiceSOAP" type="tns:EmailService">
     <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="send">
-      <soap:operation soapAction="http://www.lcobucci.com.br/services/CalculadoraFresca/send"/>
+      <soap:operation soapAction="http://localhost/emailService/public/message/send"/>
       <wsdl:input>
-        <soap:body namespace="http://www.lcobucci.com.br/services/CalculadoraFresca" use="literal"/>
+        <soap:body namespace="http://localhost/emailService/public/message" use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body namespace="http://www.lcobucci.com.br/services/CalculadoraFresca" use="literal"/>
+        <soap:body namespace="http://localhost/emailService/public/message" use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getById">
-      <soap:operation soapAction="http://www.lcobucci.com.br/services/CalculadoraFresca/getById"/>
+      <soap:operation soapAction="http://localhost/emailService/public/message/getById"/>
       <wsdl:input>
-        <soap:body namespace="http://www.lcobucci.com.br/services/CalculadoraFresca" use="literal"/>
+        <soap:body namespace="http://localhost/emailService/public/message" use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body namespace="http://www.lcobucci.com.br/services/CalculadoraFresca" use="literal"/>
+        <soap:body namespace="http://localhost/emailService/public/message" use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="listAll">
-      <soap:operation soapAction="http://www.lcobucci.com.br/services/CalculadoraFresca/listAll"/>
+      <soap:operation soapAction="http://localhost/emailService/public/message/listAll"/>
       <wsdl:input>
-        <soap:body namespace="http://www.lcobucci.com.br/services/CalculadoraFresca" use="literal"/>
+        <soap:body namespace="http://localhost/emailService/public/message" use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body namespace="http://www.lcobucci.com.br/services/CalculadoraFresca" use="literal"/>
+        <soap:body namespace="http://localhost/emailService/public/message" use="literal"/>
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>

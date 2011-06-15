@@ -1,10 +1,11 @@
 <?php
 
-class EmailServiceMessageController implements EmailServiceMessageInterface
+class EmailServiceMessageController
 {
 	public function __construct(AppRequest $request) {
+		throw new SoapFault("Client Sei lah.");
 		$vars = $request->getVars();
-		switch ($request->getUriSegment(2)) {
+		switch ($request->getUriSegment(1)) {
 			case 'send':
 				return $this->send($vars['chave'], $vars['assunto'], $vars['conteudo'], $vars['emailDestinatario'], $vars['nomeDestinatario']);
 			case 'getById':
@@ -44,6 +45,7 @@ class EmailServiceMessageController implements EmailServiceMessageInterface
 	 * @see EmailServiceMessageService::getById()
 	 */
 	public function getById($chave, $id) {
+		throw new SoapFault('dfsdfsdf');
 		$conta = $this->verificaChave($chave);
 		$messageDao = new MessageDao();
 		
@@ -145,7 +147,7 @@ class EmailServiceMessageController implements EmailServiceMessageInterface
 		$messageDto->nomeRemetente = $message->getAccount()->getPerson()->getName();
 		$messageDto->assunto = $message->getSubject();
 		$messageDto->conteudo = $message->getContent();
-		$messageDto->dataEnvio = $message->getDateSent();
+		$messageDto->dataEnvio = $message->getDateSent()->format('Y-m-d');
 		
 		return $messageDto;
 	}
