@@ -102,7 +102,7 @@
   
   <wsdl:service name="EmailService">
     <wsdl:port binding="tns:EmailServiceSOAP" name="EmailServiceSOAP">
-      <soap:address location="http://localhost/emailService/public/index.php"/>
+      <soap:address location="http://localhost/emailService/public/message"/>
     </wsdl:port>
   </wsdl:service>
   

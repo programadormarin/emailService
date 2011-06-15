@@ -1,5 +1,5 @@
 <?php
-interface EmailServiceMessageService
+interface EmailServiceMessageInterface
 {
 	/**
 	 * Envia uma nova mensagem

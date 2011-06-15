@@ -19,7 +19,7 @@ div#mensagem {
 }
 
 div#cadastro {
-	margin: 150px 0 0 200px;
+	margin: 100px 0 0 200px;
 	width: 730px;
 	padding: 10px;
 	background: #99aadd;
@@ -31,6 +31,10 @@ div#cadastro h2 {
 	color: #2355ca;
 }
 
+div#cadastro p {
+	margin: 0;
+}
+
 div#cadastro legend {
 	text-align: center;
 	color: #2355aa;
@@ -39,7 +43,7 @@ div#cadastro legend {
 
 div#cadastro fieldset {
 	width: 700px;
-	height: 260px;
+	height: 380px;
 	border-radius: 10px;
 	padding: 10px;
 }

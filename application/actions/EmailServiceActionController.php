@@ -31,11 +31,12 @@ class EmailServiceActionController implements AppAction
 	 */
 	protected function getAction(AppRequest $request)
 	{
-		switch ($request->getUriSegment(1)) {
+		switch ($request->getUriSegment(0)) {
 			case 'message':
-				$server = new SoapServer(__DIR__ . '../webservices/wsdl/EmailService.wsdl');
+				$server = new SoapServer(__DIR__ . '/../webservices/wsdl/EmailService.wsdl');
 				$server->setClass('EmailServiceMessageController');
 				$server->handle();
+				die();
 				break;
 			default:
 				if ($request->getHttpMethod() === 'POST'){

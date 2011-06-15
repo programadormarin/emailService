@@ -1,6 +1,6 @@
 <?php
 
-class EmailServiceMessageController implements EmailServiceMessageService
+class EmailServiceMessageController implements EmailServiceMessageInterface
 {
 	public function __construct(AppRequest $request) {
 		$vars = $request->getVars();
@@ -150,5 +150,3 @@ class EmailServiceMessageController implements EmailServiceMessageService
 		return $messageDto;
 	}
 }
-
-?>
